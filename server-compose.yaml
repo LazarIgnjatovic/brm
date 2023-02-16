@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  server:
+    image: ruo/tensor
+    ports:
+      - 8000:8000
+    environment:
+      - MODEL_PATH=/app/model
+    volumes:
+      - model:/app/model
+
+volumes:
+  model:
