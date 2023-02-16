@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+  labels:
+   - server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: ruo/tensor 
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MODEL_PATH
+              value: /app/model
+          volumeMounts:
+            - mountPath: "/app/model"
+              name: modelpd
+      volumes:
+        - name: modelpd
+          persistentVolumeClaim:
+            claimName: model-claim
+            #[TODO] create claim
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server-service
+spec:
+  selector:
+    app: server
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30001
+
+---
+# [TODO] ingress controler setup
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   name: server-ingress
+# spec:
+#   rules:
+#   - host: localhost
+#     http:
+#       paths:
+#       - backend:
+#           serviceName: server-service
+#           servicePort: 8000
