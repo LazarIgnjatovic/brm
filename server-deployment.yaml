@@ -1,9 +1,10 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: server-deployment
   labels:
-   - server
+    - server
 spec:
   replicas: 2
   selector:
@@ -16,14 +17,14 @@ spec:
     spec:
       containers:
         - name: server
-          image: lazar010/ruo 
+          image: lazar010/ruo
           ports:
             - containerPort: 8000
           env:
             - name: MODEL_PATH
               value: /app/model
           volumeMounts:
-            - mountPath: "/app/model"
+            - mountPath: /app/model
               name: modelpd
       volumes:
         - name: modelpd
