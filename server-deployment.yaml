@@ -18,6 +18,11 @@ spec:
       containers:
         - name: server
           image: lazar010/ruo
+          resources:
+            limits:
+              ephemeral-storage: 5Gi
+            requests:
+              ephemeral-storage: 2Gi
           ports:
             - containerPort: 8000
           env:
