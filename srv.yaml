@@ -15,11 +15,6 @@ spec:
       labels:
         app: server
     spec:
-      volumes:
-        - name: modelpd
-          nfs:
-            server: 10.10.3.80
-            path: /var/nfs/public
       containers:
         - name: server
           image: lazar010/ruo
@@ -33,9 +28,6 @@ spec:
           env:
             - name: MODEL_PATH
               value: /app/model
-          volumeMounts:
-            - mountPath: /app/model
-              name: modelpd
       
 
 ---
