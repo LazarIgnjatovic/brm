@@ -47,6 +47,8 @@ spec:
   selector:
     app: server
   type: LoadBalancer
+  externalIPs:
+  - 10.10.3.81
   ports:
     - protocol: TCP
       port: 8000
