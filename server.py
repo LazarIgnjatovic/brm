@@ -14,13 +14,9 @@ if __name__ != '__main__':
 
 model_path = os.environ.get("MODEL_PATH", "/app/model")
 
-def load_model(model_path):
-    model = tf.keras.models.load_model(model_path)
-    return model
-
 @app.route("/test", methods=["POST"])
 def test_model():
-    model = load_model(model_path)
+    model = tf.keras.models.load_model(model_path)
     csv = request.get_json()
     array = json.loads(csv)
     data = np.array(array, np.float64)
