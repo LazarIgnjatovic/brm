@@ -7,7 +7,7 @@ from statistics import mean
 import numpy as np
 
 test_url = "http://localhost:80/test"
-testfile_path = './data/test/testset.csv'
+testfile_path = './testset.csv'
 
 logging.basicConfig(level=logging.INFO)
 
