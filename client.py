@@ -1,6 +1,5 @@
 import pandas as pd
 import grequests
-import json
 import logging
 
 test_url = "http://localhost:80/test"

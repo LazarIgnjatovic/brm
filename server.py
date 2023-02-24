@@ -13,10 +13,17 @@ if __name__ != '__main__':
     app.logger.setLevel(gunicorn_logger.level)
 
 model_path = os.environ.get("MODEL_PATH", "/app/model")
+model = None
+
+def load_model():
+    global model
+    if model is None:
+        model = tf.keras.models.load_model(model_path)
+    return model
 
 @app.route("/test", methods=["POST"])
 def test_model():
-    model = tf.keras.models.load_model(model_path)
+    model = load_model()
     csv = request.get_json()
     array = json.loads(csv)
     data = np.array(array, np.float64)

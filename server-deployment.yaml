@@ -23,6 +23,7 @@ spec:
       containers:
         - name: server
           image: lazar010/ruo
+          imagePullPolicy: Always
           resources:
             limits:
               ephemeral-storage: 5Gi
